@@ -17,7 +17,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.faquini.workshopmongo.domain.Post;
 import com.faquini.workshopmongo.domain.User;
-import com.faquini.workshopmongo.dto.UserDto;
+import com.faquini.workshopmongo.dto.UserDTO;
 import com.faquini.workshopmongo.services.UserService;
 
 @RestController
@@ -28,20 +28,20 @@ public class UserResource {
 	private UserService service;
 
 	@RequestMapping(method = RequestMethod.GET)
-	public ResponseEntity<List<UserDto>> findAll() {
+	public ResponseEntity<List<UserDTO>> findAll() {
 		List<User> list = service.findAll();
-		List<UserDto> listDto = list.stream().map(x -> new UserDto(x)).collect(Collectors.toList());
+		List<UserDTO> listDto = list.stream().map(x -> new UserDTO(x)).collect(Collectors.toList());
 		return ResponseEntity.ok().body(listDto);
 	}
 	
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
-	public ResponseEntity<UserDto> findById(@PathVariable String id) {
+	public ResponseEntity<UserDTO> findById(@PathVariable String id) {
 		User obj = service.findById(id);
-		return ResponseEntity.ok().body(new UserDto(obj));
+		return ResponseEntity.ok().body(new UserDTO(obj));
 	}
 	
 	@PostMapping
-	public ResponseEntity<Void> insert(@RequestBody UserDto objDto) {
+	public ResponseEntity<Void> insert(@RequestBody UserDTO objDto) {
 		User obj = service.fromDTO(objDto);
 		obj = service.insert(obj);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
@@ -56,7 +56,7 @@ public class UserResource {
 
 	//@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
 	@PutMapping(value = "/{id}")
-	public ResponseEntity<Void> update(@RequestBody UserDto objDto, @PathVariable String id) {
+	public ResponseEntity<Void> update(@RequestBody UserDTO objDto, @PathVariable String id) {
 		User obj = service.fromDTO(objDto);
 		obj.setId(id);
 		obj = service.update(obj);

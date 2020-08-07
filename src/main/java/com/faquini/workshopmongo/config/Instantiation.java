@@ -10,7 +10,8 @@ import org.springframework.context.annotation.Configuration;
 
 import com.faquini.workshopmongo.domain.Post;
 import com.faquini.workshopmongo.domain.User;
-import com.faquini.workshopmongo.dto.AuthorDto;
+import com.faquini.workshopmongo.dto.AuthorDTO;
+import com.faquini.workshopmongo.dto.CommentDTO;
 import com.faquini.workshopmongo.repositoty.PostRepository;
 import com.faquini.workshopmongo.repositoty.UserRepository;
 
@@ -38,8 +39,15 @@ public class Instantiation implements CommandLineRunner{
 		
 		userRepository.saveAll(Arrays.asList(maria, bob, alex));
 		
-		Post post1 = new Post(null, sdf.parse("06/08/2020"), "Bom Dia", "Dia amanheceu ensolarado", new AuthorDto(maria));
-		Post post2 = new Post(null, sdf.parse("07/08/2020"), "Bom Dia", "Dia amanheceu ensolarado de novo", new AuthorDto(maria));
+		Post post1 = new Post(null, sdf.parse("06/08/2020"), "Bom Dia", "Dia amanheceu ensolarado", new AuthorDTO(maria));
+		Post post2 = new Post(null, sdf.parse("07/08/2020"), "Bom Dia", "Dia amanheceu ensolarado de novo", new AuthorDTO(maria));
+		
+		CommentDTO c1 = new CommentDTO("Tenha um bom dia", sdf.parse("06/08/2020"), new AuthorDTO(alex));
+		CommentDTO c2 = new CommentDTO("Bom para ir a praia", sdf.parse("06/08/2020"), new AuthorDTO(bob));
+		CommentDTO c3 = new CommentDTO("Mais um belo dia", sdf.parse("07/08/2020"), new AuthorDTO(alex));
+		
+		post1.setComments(Arrays.asList(c1, c2));
+		post2.setComments(Arrays.asList(c3));
 				
 		postRepository.saveAll(Arrays.asList(post1, post2));
 		

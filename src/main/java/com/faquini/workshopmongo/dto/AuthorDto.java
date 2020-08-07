@@ -4,16 +4,16 @@ import java.io.Serializable;
 
 import com.faquini.workshopmongo.domain.User;
 
-public class AuthorDto implements Serializable{
+public class AuthorDTO implements Serializable{
 	private static final long serialVersionUID = 1L;
 
 	private String id;
 	private String name;
 	
-	public AuthorDto() {
+	public AuthorDTO() {
 	}
 
-	public AuthorDto(User obj) {
+	public AuthorDTO(User obj) {
 		id = obj.getId();
 		name = obj.getName();
 	}

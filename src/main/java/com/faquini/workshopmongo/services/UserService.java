@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.faquini.workshopmongo.domain.User;
-import com.faquini.workshopmongo.dto.UserDto;
+import com.faquini.workshopmongo.dto.UserDTO;
 import com.faquini.workshopmongo.repositoty.UserRepository;
 import com.faquini.workshopmongo.services.exception.ObjectNotFoundException;
 
@@ -45,7 +45,7 @@ public class UserService {
 		newObj.setEmail(obj.getEmail());
 	}
 
-	public User fromDTO(UserDto objDto) {
+	public User fromDTO(UserDTO objDto) {
 		return new User(objDto.getId(), objDto.getName(), objDto.getEmail());
 	}
 }
